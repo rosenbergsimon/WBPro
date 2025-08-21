@@ -1,0 +1,8 @@
+customtkinter
+pyautogui
+selenium
+pillow
+matplotlib
+CTkMessageBox
+requests
+psutil
