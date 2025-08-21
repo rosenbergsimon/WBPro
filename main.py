@@ -3,6 +3,22 @@ import customtkinter as tk
 from threading import Thread
 import time
 import ctypes
+
+def set_scale():
+    user32 = ctypes.windll.user32
+    user32.SetProcessDpiAwarenessContext(-1)
+    handle = user32.GetThreadDpiAwarenessContext()
+    width = user32.GetSystemMetrics(0)
+    height = user32.GetSystemMetrics(1)
+    height_ratio = height / 1050
+    width_ratio = width / 1680
+    scale_to_use = min(height_ratio, width_ratio)
+
+    tk.set_window_scaling(scale_to_use)
+    tk.set_widget_scaling(scale_to_use)
+
+set_scale()
+
 import pyautogui
 
 # bg = #353535, buttons = #3EA216, highlight buttons = #74BD57
@@ -73,23 +89,9 @@ class MainApp:
         self.root.destroy()
 
 
-def set_scale():
-    user32 = ctypes.windll.user32
-    user32.SetProcessDpiAwarenessContext(-1)
-    width = user32.GetSystemMetrics(0)
-    height = user32.GetSystemMetrics(1)
-    height_ratio = height / 1050
-    width_ratio = width / 1680
-    scale_to_use = min(height_ratio, width_ratio)
-
-    tk.set_window_scaling(scale_to_use)
-    tk.set_widget_scaling(scale_to_use)
-
-
 # run is withdraw from the taskbar/user access, is only for mainloop. The run instance is actually the base root, but
 # nothing happens on it. The whole program is run from toplevel windows.
 if __name__ == "__main__":
-    set_scale()
     run = tk.CTk()
     run.withdraw()
 
