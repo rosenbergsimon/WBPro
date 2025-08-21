@@ -8,8 +8,6 @@ This program can be easily run from running the main.py file. The program incorp
 
 This program will only work on Windows 10+ systems. 
 
-Please ensure all the necessary libraries/packages needed from the requirements.txt file are installed with the environment/Venv.
-
 In order to properly run the program, it is likely you will need to have user permissions within FlightLogger that allow for the reading of information on the flight schedule. You will also need the ability to modify bookings on the schedule if using WBPro to upload WB's to a rental or operation flight. 
 
 A minimum screen resolution of 1680x1050 (with 1x Windows zoom scaling applied) is currently required to function properly. 
@@ -25,10 +23,6 @@ Selenium is implemented to manually "click" on items on the screen the same way 
 # Environment Variables
 
 Two environment variables are required. The names for these are below. 
-
-On Windows, use the following PowerShell command to set environment variables. A system restart is required to use them afterwards. Use the quotation marks for the value. 
-
-    setx VARIABLE_NAME "VALUE"
 
 FlightLogger GraphQL API Key (Obtained from my.flightlogger.net): 
 
