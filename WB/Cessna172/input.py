@@ -193,7 +193,7 @@ class Input(tk.CTkFrame):
         if (self.data['fuel_load'] - (self.data['fuel_taxi'] + self.data['fuel_flight'])) < 10:
             a = self.data['fuel_load'] - (self.data['fuel_taxi'] + self.data['fuel_flight'])
             CTkMessagebox(title="Error",
-                          message=f"Caution: {a} gallons of fuel will remain after landing. (Under 1 hour of "
+                          message=f"Caution: {round(a, 1)} gallons of fuel will remain after landing. (Under 1 hour of "
                                   f"flight time. Proceed at your own risk.)",
                           font=("ebrima", 14), fg_color="#353535",
                           button_color="#3EA216")
