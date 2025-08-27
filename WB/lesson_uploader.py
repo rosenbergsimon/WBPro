@@ -63,9 +63,9 @@ class LessonWB:
                               message="FlightLogger has logged out. Please contact dispatch. \n"
                                       "Use paper weight and balance for now.",
                               font=("ebrima", 14), fg_color="#353535", button_color="#3EA216")
-                driver.close()
+                driver.quit()
             else:
-                driver.close()
+                driver.quit()
                 self.timeout_error()
                 self.failed_reset_icons()
             return
@@ -77,7 +77,7 @@ class LessonWB:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
                                             ((By.CSS_SELECTOR, ".StandardTextInput-sc-15qxh6z-0.mjkcO")))
         except TimeoutException:
-            driver.close()
+            driver.quit()
             self.timeout_error()
             self.failed_reset_icons()
             return
@@ -99,10 +99,10 @@ class LessonWB:
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
                                             ((By.XPATH,
-                                              "/html/body/div[4]/div/div/div/div[2]/div[1]/div/div[1]/div/"
+                                              "/html/body/div[5]/div/div/div/div[2]/div[1]/div/div[1]/div/"
                                               "div[3]/div[3]/div/div[1]/a")))
         except TimeoutException:
-            driver.close()
+            driver.quit()
             self.timeout_error()
             self.failed_reset_icons()
             return
@@ -110,7 +110,7 @@ class LessonWB:
         # needed to ensure the upload actually saved on flight logger servers, and closing of webdriver is ok
         time.sleep(2)
 
-        driver.close()
+        driver.quit()
 
         time.sleep(0.2)
 

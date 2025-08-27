@@ -63,9 +63,9 @@ class BookingWB:
                               message="FlightLogger has logged out. Please contact dispatch. \n"
                                       "Use paper weight and balance for now.",
                               font=("ebrima", 14), fg_color="#353535", button_color="#3EA216")
-                driver.close()
+                driver.quit()
             else:
-                driver.close()
+                driver.quit()
                 self.timeout_error()
                 self.failed_reset_icons()
             return
@@ -83,7 +83,7 @@ class BookingWB:
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
         except TimeoutException:
-            driver.close()
+            driver.quit()
             self.timeout_error()
             self.failed_reset_icons()
             return
@@ -112,7 +112,7 @@ class BookingWB:
         if len(no_instructor_avail) >= 1:
             no_instructor_avail[1].click()
             time.sleep(2)
-            driver.close()
+            driver.quit()
             time.sleep(0.2)
             # below is to make sure the specially named file gets deleted since it is not needed anymore
             print(1)
@@ -121,11 +121,9 @@ class BookingWB:
             self.finish_upload()
         else:
             time.sleep(2)
-            driver.close()
+            driver.quit()
             time.sleep(0.2)
-            print(1)
             self.root.update()
-            print(2)
             self.finish_upload()
 
     # grays out some buttons and changes some colours. Also clears the temp folder and adds the combined.jpeg to it

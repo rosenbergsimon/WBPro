@@ -96,6 +96,6 @@ if __name__ == "__main__":
     run.withdraw()
 
     app = MainApp(run)
-    watcher = MouseInactivityWatcher(run, 30, app)
+    watcher = MouseInactivityWatcher(run, 120, app)
 
     run.mainloop()
