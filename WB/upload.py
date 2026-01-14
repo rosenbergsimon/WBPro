@@ -178,10 +178,13 @@ class Upload(tk.CTkFrame):
         # runs the api call
         students = return_students(self.data['ident'])
         student_buttons = []
+        # sort by time delete 3:
 
+        for i in students: 
+            i['time'] = dt.datetime.fromisoformat(i['time'])
+        students.sort(key=lambda x: x['time'])
         for i in students:
-            utc_format = dt.datetime.fromisoformat(i['time'])
-            local_time = utc_format.astimezone(dt.timezone(dt.timedelta(hours=-6)))
+            local_time = i['time'].astimezone(dt.timezone(dt.timedelta(hours=-6)))
             time_needed = local_time.strftime("%H:%M")
 
             if i['flight_type'] == "SingleStudentBooking" or i['flight_type'] == "MultiStudentBooking":

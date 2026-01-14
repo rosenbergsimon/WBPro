@@ -12,11 +12,15 @@ def return_students(ident):
 
     start_search = start_search.isoformat(timespec='seconds') + "Z"
 
+    end_search = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=12)
+    end_search = end_search.replace(tzinfo=None)
+    end_search = end_search.isoformat(timespec='seconds') + "Z"
+
     headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
 
     query = f"""
         {{
-          bookings(from: "{start_search}", first: 30, subtypes: [SINGLE_STUDENT, MULTI_STUDENT, RENTAL, OPERATION], all: true, statuses: [OPEN]) 
+          bookings(from: "{start_search}", to: "{end_search}", first: 60, subtypes: [SINGLE_STUDENT, MULTI_STUDENT, RENTAL, OPERATION], all: true, statuses: [OPEN]) 
           {{
             nodes {{
               __typename
@@ -139,9 +143,5 @@ def return_students(ident):
                                 'codes': [i['students'][1]['id'], i['plannedLessons'][1]['userProgram']['id'],
                                           i['plannedLessons'][1]['id']], 'flight_type': i['__typename'],
                                 'time': i['flightStartsAt']})
-
-        # in case a multi student booking is present, it gets rid of the last item
-        if len(params_list) > 3:
-            del params_list[3:]
 
     return params_list
