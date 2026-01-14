@@ -115,9 +115,7 @@ class BookingWB:
             driver.quit()
             time.sleep(0.2)
             # below is to make sure the specially named file gets deleted since it is not needed anymore
-            print(1)
             self.root.update()
-            print(2)
             self.finish_upload()
         else:
             time.sleep(2)

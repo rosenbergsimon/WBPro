@@ -2,6 +2,7 @@ import customtkinter as tk
 from CTkMessagebox import CTkMessagebox
 from selenium import webdriver
 from selenium.common import TimeoutException
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -71,27 +72,28 @@ class LessonWB:
             return
 
         buttons = driver.find_element(By.CSS_SELECTOR, ".StandardButton__Container-gpgy18-1.dQqJKa")
+        driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
+        time.sleep(0.5)
+        for i in range(4):
+            driver.find_element("tag name", "body").send_keys(Keys.ARROW_UP)
         buttons.click()
 
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
-                                            ((By.CSS_SELECTOR, ".StandardTextInput-sc-15qxh6z-0.mjkcO")))
+                                            ((By.XPATH, "/html/body/div[7]/div/div/form/div[2]/div[1]/input")))
         except TimeoutException:
             driver.quit()
             self.timeout_error()
             self.failed_reset_icons()
             return
-
-        name_label = driver.find_element(By.CSS_SELECTOR, ".StandardTextInput-sc-15qxh6z-0.mjkcO")
+        name_label = driver.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[2]/div[1]/input")
         name_label.send_keys(f"*{self.info['file_name']}")
         file_drag = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
         file_drag.send_keys(rf"{os.getcwd()}\WB\Photos\combined.jpeg")
 
         button_wait = WebDriverWait(driver, 20)
 
-        add_button = button_wait.until(lambda d: d.find_element(By.CSS_SELECTOR,
-                                                                ".StandardButton__StyledButton-gpgy18-0."
-                                                                "DgzeE.btn.btn-success "))
+        add_button = button_wait.until(lambda d: d.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[3]/button[1]"))
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
 
         add_button.click()
@@ -99,8 +101,7 @@ class LessonWB:
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
                                             ((By.XPATH,
-                                              "/html/body/div[5]/div/div/div/div[2]/div[1]/div/div[1]/div/"
-                                              "div[3]/div[3]/div/div[1]/a")))
+                                              "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/div/div/div/div/div[2]/div[2]/div[1]/div[1]/a")))
         except TimeoutException:
             driver.quit()
             self.timeout_error()

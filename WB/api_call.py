@@ -113,8 +113,7 @@ def return_students(ident):
 
     params_list = []
 
-    # the program will only display the next three flights.
-    for i in same_aircraft_items[0:3]:
+    for i in same_aircraft_items:
         if i['__typename'] == 'OperationBooking':
             params_list.append({'flight_type': i['__typename'], 'time': i['flightStartsAt'],
                                 'student': i['pic']['firstName'] + " " + i['pic']['lastName'], 'id': i['id']})
