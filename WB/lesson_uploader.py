@@ -37,6 +37,8 @@ class LessonWB:
 
         self.find_browser_instances(self.cookie_path)
 
+        self.status_bar.configure(text="17% Complete.")
+
         thread = threading.Thread(target=lambda: self.execute_selenium(), daemon=True)
         thread.start()
 
@@ -71,6 +73,7 @@ class LessonWB:
                 self.failed_reset_icons()
             return
 
+        self.status_bar.configure(text="34% Complete.")
         buttons = driver.find_element(By.CSS_SELECTOR, ".StandardButton__Container-gpgy18-1.dQqJKa")
         driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
         time.sleep(0.5)
@@ -86,16 +89,16 @@ class LessonWB:
             self.timeout_error()
             self.failed_reset_icons()
             return
+        self.status_bar.configure(text="50% Complete.")
         name_label = driver.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[2]/div[1]/input")
         name_label.send_keys(f"*{self.info['file_name']}")
         file_drag = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
         file_drag.send_keys(rf"{os.getcwd()}\WB\Photos\combined.jpeg")
-
         button_wait = WebDriverWait(driver, 20)
 
         add_button = button_wait.until(lambda d: d.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[3]/button[1]"))
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
-
+        self.status_bar.configure(text="66% Complete.")
         add_button.click()
 
         try:
@@ -107,7 +110,7 @@ class LessonWB:
             self.timeout_error()
             self.failed_reset_icons()
             return
-
+        self.status_bar.configure(text="83% Complete.")
         # needed to ensure the upload actually saved on flight logger servers, and closing of webdriver is ok
         time.sleep(2)
 
@@ -122,7 +125,7 @@ class LessonWB:
     # grays some buttons out and changes some colours
     def start_upload(self):
         self.update_image([self.info['student'], self.info['instructor']])
-        self.status_bar.configure(text="Upload in Progress.\n This may take over 30 seconds.", fg_color="#A08000")
+        self.status_bar.configure(text="0% Complete.", fg_color="#A08000")
         self.upload_button.configure(state="disabled", fg_color="#606060")
         self.root.update_idletasks()  # tkinter needs to finish all tasks before the webdriver will hog the thread.
 

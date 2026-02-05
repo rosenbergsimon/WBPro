@@ -36,6 +36,8 @@ class BookingWB:
 
         self.find_browser_instances(self.cookie_path)
 
+        self.status_bar.configure(text="17% Complete.")
+
         thread = threading.Thread(target=lambda: self.execute_selenium(), daemon=True)
         thread.start()
 
@@ -69,7 +71,7 @@ class BookingWB:
                 self.timeout_error()
                 self.failed_reset_icons()
             return
-
+        self.status_bar.configure(text="34% Complete.")
         time.sleep(0.5)
         lock_btn = driver.find_elements(By.CSS_SELECTOR, "[title='Toggle create mode on']")
         if len(lock_btn) >= 1:
@@ -87,7 +89,7 @@ class BookingWB:
             self.timeout_error()
             self.failed_reset_icons()
             return
-
+        self.status_bar.configure(text="50% Complete.")
         file_drag = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
         file_drag.send_keys(rf"{os.getcwd()}\WB\Photos\temp\{self.info['file_name']}.jpeg")
 
@@ -103,6 +105,7 @@ class BookingWB:
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
 
         add_button.click()
+        self.status_bar.configure(text="66% Complete.")
 
         time.sleep(2)
 
@@ -111,6 +114,7 @@ class BookingWB:
                                                                     "1-0.dXqePM")
         if len(no_instructor_avail) >= 1:
             no_instructor_avail[1].click()
+            self.status_bar.configure(text="83% Complete.")
             time.sleep(2)
             driver.quit()
             time.sleep(0.2)
@@ -118,6 +122,7 @@ class BookingWB:
             self.root.update()
             self.finish_upload()
         else:
+            self.status_bar.configure(text="83% Complete.")
             time.sleep(2)
             driver.quit()
             time.sleep(0.2)
@@ -145,7 +150,7 @@ class BookingWB:
         new_file = os.path.join("WB/Photos/temp", f"{self.info['file_name']}.jpeg")
         shutil.copy2("WB/Photos/combined.jpeg", new_file)
 
-        self.status_bar.configure(text="Upload in Progress.\n This may take over 30 seconds.", fg_color="#A08000")
+        self.status_bar.configure(text="0% Complete.", fg_color="#A08000")
         self.upload_button.configure(state="disabled", fg_color="#606060")
         self.root.update_idletasks()  # tkinter needs to finish all tasks before the webdriver will hog the thread.
 
