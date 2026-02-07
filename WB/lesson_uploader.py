@@ -77,7 +77,7 @@ class LessonWB:
         buttons = driver.find_element(By.CSS_SELECTOR, ".StandardButton__Container-gpgy18-1.dQqJKa")
         driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
         time.sleep(0.5)
-        for i in range(4):
+        for i in range(8):
             driver.find_element("tag name", "body").send_keys(Keys.ARROW_UP)
         buttons.click()
 
