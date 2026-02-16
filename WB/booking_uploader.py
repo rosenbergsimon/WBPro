@@ -53,6 +53,8 @@ class BookingWB:
 
         driver.get(self.url)
 
+        driver.maximize_window()
+
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located((By.ID, f"bookingBlock{self.info['id']}")))
         except TimeoutException:

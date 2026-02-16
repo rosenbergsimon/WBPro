@@ -53,6 +53,8 @@ class LessonWB:
 
         driver.get(self.url)
 
+        driver.maximize_window()
+
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
                                             ((By.CSS_SELECTOR, "div.StandardButton__Container-gpgy18-1.dQqJKa")))
@@ -79,6 +81,7 @@ class LessonWB:
         time.sleep(0.5)
         for i in range(8):
             driver.find_element("tag name", "body").send_keys(Keys.ARROW_UP)
+        time.sleep(0.5)
         buttons.click()
 
         try:
