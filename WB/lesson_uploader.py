@@ -74,6 +74,10 @@ class LessonWB:
                 self.timeout_error()
                 self.failed_reset_icons()
             return
+        
+        popup = driver.find_elements(By.XPATH, "/html/body/div[7]/div/div[1]/form/button")
+        if len(popup) >= 1:
+            popup[0].click()
 
         self.status_bar.configure(text="34% Complete.")
         buttons = driver.find_element(By.CSS_SELECTOR, ".StandardButton__Container-gpgy18-1.dQqJKa")

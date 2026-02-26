@@ -73,6 +73,11 @@ class BookingWB:
                 self.timeout_error()
                 self.failed_reset_icons()
             return
+        
+        popup = driver.find_elements(By.XPATH, "/html/body/div[7]/div/div[1]/form/button")
+        if len(popup) >= 1:
+            popup[0].click()
+            
         self.status_bar.configure(text="34% Complete.")
         time.sleep(0.5)
         lock_btn = driver.find_elements(By.CSS_SELECTOR, "[title='Toggle create mode on']")
