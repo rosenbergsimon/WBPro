@@ -55,6 +55,11 @@ class BookingWB:
 
         driver.maximize_window()
 
+        popup = driver.find_elements(By.CSS_SELECTOR, ".svg-inline--fa.fa-xmark")
+        if len(popup) >= 1:
+            time.sleep(3)
+            popup[0].click()
+
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located((By.ID, f"bookingBlock{self.info['id']}")))
         except TimeoutException:
@@ -74,10 +79,6 @@ class BookingWB:
                 self.failed_reset_icons()
             return
         
-        popup = driver.find_elements(By.XPATH, "/html/body/div[7]/div/div[1]/form/button")
-        if len(popup) >= 1:
-            popup[0].click()
-            
         self.status_bar.configure(text="34% Complete.")
         time.sleep(0.5)
         lock_btn = driver.find_elements(By.CSS_SELECTOR, "[title='Toggle create mode on']")
