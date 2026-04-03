@@ -13,9 +13,9 @@ class Input(tk.CTkFrame):
         self.configure(fg_color="#353535", width=533, height=900)
         self.grid_propagate(False)
         self.data = data
-        self.label_font = tk.CTkFont(family="ebrima", size=16)
-        self.title_font = tk.CTkFont(family="ebrima", size=18)
-        self.title_u_font = tk.CTkFont(family="ebrima", size=18, underline=True)
+        self.label_font = tk.CTkFont(family="ebrima", size=14)
+        self.title_font = tk.CTkFont(family="ebrima", size=16)
+        self.title_u_font = tk.CTkFont(family="ebrima", size=16, underline=True)
 
         self.one_photo = CTkImage(dark_image=Image.open("./WB/Photos/one.png"), size=(48, 48))
 

@@ -3,6 +3,7 @@ import customtkinter as tk
 from threading import Thread
 import time
 import ctypes
+import sys
 
 def set_scale():
     user32 = ctypes.windll.user32
@@ -17,7 +18,10 @@ def set_scale():
     tk.set_window_scaling(scale_to_use)
     tk.set_widget_scaling(scale_to_use)
 
-set_scale()
+if sys.platform != "win32":
+    pass
+else:
+    set_scale()
 
 import pyautogui
 

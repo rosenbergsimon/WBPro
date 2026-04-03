@@ -1,5 +1,7 @@
 # WBPro
 
+<!-- rewrite all of this to be just a personal project. Selenium limitations. Just go over what it does, not how someone else could run the program. put the prockill in the termination of the program to add safety -->
+
 WBPro is an end-user-focused Python program designed for Windows 10+ that facilitates the integration of a flight school's weight-and-balance control system with FlightLogger's web-based flight school scheduling and management service. It allows for electronic creation of completed weight-and-balance forms, and subsequent uploading to the FlightLogger website. The completed form is stored on a students' "lesson", or on a flight booking, in the case of a non-student flight. 
 
 This program can be easily run from running the main.py file. The program incorporates a User Interface built with the CustomTkinter module, weight-and-balance form creation built with MatPlotLib, an API call using FlightLogger's GraphQL API to retrieve upcoming flight information, and an automated web browser component with Selenium to do the uploading to the FlightLogger website. An API function does not exist for uploading documents to lessons or bookings on FlightLogger. The WBPro program utilizes many other libraries and incorporates a small amount of basic error-handling to increase suitability for end-user use. 

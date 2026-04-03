@@ -17,10 +17,10 @@ class Upload(tk.CTkFrame):
         self.quit_app = close
         self.three_photo = CTkImage(dark_image=Image.open("WB/Photos/three.png"), size=(48, 48))
         self.configure(fg_color="#353535", width=533, height=900)
-        self.label_font = tk.CTkFont(family="ebrima", size=16)
-        self.title_font = tk.CTkFont(family="ebrima", size=18)
-        self.label_u_font = tk.CTkFont(family="ebrima", size=14, underline=True)
-        self.title_u_font = tk.CTkFont(family="ebrima", size=18, underline=True)
+        self.label_font = tk.CTkFont(family="ebrima", size=14)
+        self.title_font = tk.CTkFont(family="ebrima", size=16)
+        self.label_u_font = tk.CTkFont(family="ebrima", size=12, underline=True)
+        self.title_u_font = tk.CTkFont(family="ebrima", size=16, underline=True)
 
         self.update_image = update_image
         self.data = data

@@ -1,6 +1,8 @@
 import customtkinter as tk
 from CTkMessagebox import CTkMessagebox
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,6 +12,7 @@ import threading
 import time
 import os
 import shutil
+import sys
 
 
 # this contains the methods needed to upload a booking to a flight logger booking (rental/ops flights)
@@ -22,7 +25,12 @@ class BookingWB:
         self.root = root
         self.close = close
         self.update_image = update_image
-        self.cookie_path = rf"user-data-dir=C:\Users\{os.getlogin()}\AppData\Local\Programs\Python\Python312\Lib\site-packages\selenium\profile\wpp"
+
+        if sys.platform == "linux":
+            self.profile_path = f"/home/{os.getlogin()}/.cache/mozilla/firefox/folder.selenium_profile"
+        if sys.platform == "win32":
+            self.profile_path = f"user-data-dir:C:/Users/{os.getlogin()}/AppData/Local/Programs/Python/Python312/Lib/site-packages/selenium/profiles/wpp"
+
         self.school_code = os.environ.get("URL_SCHOOL")
         self.url = f"https://{self.school_code}.flightlogger.net/bookings/overview"
         self.file_window = FileName(self.prepare, self.info)
@@ -34,7 +42,7 @@ class BookingWB:
 
         self.start_upload()
 
-        self.find_browser_instances(self.cookie_path)
+        self.find_browser_instances(self.profile_path)
 
         self.status_bar.configure(text="17% Complete.")
 
@@ -43,13 +51,18 @@ class BookingWB:
 
     # does the browser automation script for the upload
     def execute_selenium(self):
-        options = webdriver.EdgeOptions()
-
-        options.add_argument(self.cookie_path)
-        options.add_experimental_option("detach", True)
-        options.add_argument('headless=new')  # makes it occur in the background
-
-        driver = webdriver.Edge(options=options)
+        if sys.platform == "linux":
+            options = FirefoxOptions()
+            options.add_argument("-profile")
+            options.add_argument(self.profile_path)
+            options.add_argument("--headless=new")
+            driver = webdriver.Firefox(options=options)
+        if sys.platform == "win32":
+            options = webdriver.EdgeOptions()
+            options.add_argument(self.profile_path)
+            options.add_experimental_option("detach", True)
+            options.add_argument('headless=new')  # makes it occur in the background
+            driver = webdriver.Edge(options=options)
 
         driver.get(self.url)
 
@@ -99,7 +112,7 @@ class BookingWB:
             return
         self.status_bar.configure(text="50% Complete.")
         file_drag = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
-        file_drag.send_keys(rf"{os.getcwd()}\WB\Photos\temp\{self.info['file_name']}.jpeg")
+        file_drag.send_keys(f"{os.getcwd()}/WB/Photos/temp/{self.info['file_name']}.jpeg")
 
         # makes sure the button has had time to actually disable, before running the next detector which checks if it
         # has become enabled
@@ -193,13 +206,15 @@ class BookingWB:
     # processes with it. Which with chromium, is many, hence the loop. This will not close unrelated, public browser
     # tabs that are open.
 
-    def find_browser_instances(self, cookie_path, browser_name="msedge.exe"):  # runs under msedge.exe
+    def find_browser_instances(self, profile_path, browser_name="msedge.exe"):  # runs under msedge.exe
+        if sys.platform == "linux":
+            browser_name = "firefox-bin"
         for proc in psutil.process_iter(attrs=["pid", "name", "cmdline"]):  # finds all processes running in os
             try:
                 if browser_name.lower() in proc.info["name"].lower():  # true if process matches name with browser_name
                     cmd_args = proc.info["cmdline"]  # holds a list of args, including the user-data-dir arg.
-                    # below runs through all cmd_args, checks for cookie_path match.
-                    if cmd_args and any(cookie_path in arg for arg in cmd_args):
+                    # below runs through all cmd_args, checks for profile_path match.
+                    if cmd_args and any(profile_path in arg for arg in cmd_args):
                         proc.kill()  # ends process.
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):  # null case
                 pass
