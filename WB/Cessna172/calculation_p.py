@@ -25,8 +25,8 @@ class CalculationP:
             self.empty_arm = 39.53
         if self.data['ident'] == "C-GMKR":
             self.fuel_arm = 48
-            self.empty_weight = 1494
-            self.empty_arm = 39.1
+            self.empty_weight = 1487.4
+            self.empty_arm = 39.33
 
         self.ident = self.data['ident']
         self.fuel_load = round(self.data['fuel_load'] * 6, 2)  # 6 pounds per gallon
