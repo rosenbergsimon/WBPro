@@ -13,8 +13,8 @@ class CalculationS:
 
         if self.data['ident'] == "C-FARC":
             self.fuel_arm = 48
-            self.empty_weight = 1630.7
-            self.empty_arm = 39.57
+            self.empty_weight = 1608.05
+            self.empty_arm = 39.71
 
         self.ident = self.data['ident']
         self.fuel_load = round(self.data['fuel_load'] * 6, 2)  # 6 pounds per gallon
