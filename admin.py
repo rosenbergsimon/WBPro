@@ -33,7 +33,7 @@ if sys.platform == "linux":
     driver = webdriver.Firefox(options=options)
 if sys.platform == "win32":
     options = EdgeOptions()
-    profile_path = f"user-data-dir:C:/Users/{os.getlogin()}/AppData/Local/Programs/Python/Python312/Lib/site-packages/selenium/profiles/wpp"
+    profile_path = f"user-data-dir=C:/Users/{os.getlogin()}/AppData/Local/Programs/Python/Python312/Lib/site-packages/selenium/profiles/wpp"
     options.add_argument(profile_path)
     options.add_experimental_option("detach", True)
     driver = webdriver.Edge(options=options)
