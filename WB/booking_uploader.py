@@ -78,7 +78,7 @@ class BookingWB:
         except TimeoutException:
             # if the cookie is out of date, and FlightLogger logs itself out, the student cannot log back in themselves
             # so this element (the login box) will show up, and message box is issued.
-            login_element = driver.find_elements(By.CSS_SELECTOR, ".email.required.control-label")
+            login_element = driver.find_elements(By.CSS_SELECTOR, ".form-floating.mb-3.email.required.member_session_email")
             # will proceed if logged out.
             if len(login_element) >= 1:
                 CTkMessagebox(title="Error",
@@ -120,9 +120,7 @@ class BookingWB:
 
         button_wait = WebDriverWait(driver, 20)
 
-        add_button = button_wait.until(lambda d: d.find_element(By.CSS_SELECTOR, ".StandardButton__StyledButton-jnuff8-"
-                                                                                 "0.loMqZX.btn.btn-submit.Styles__Style"
-                                                                                 "dActionButton-m00sx1-0.dXqePM"))
+        add_button = button_wait.until(lambda d: d.find_element(By.CSS_SELECTOR, ".sc-LzLrV.ialHNx.btn.btn-submit.sc-LzLrW.iauerG"))
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
 
         add_button.click()
@@ -130,9 +128,7 @@ class BookingWB:
 
         time.sleep(2)
 
-        no_instructor_avail = driver.find_elements(By.CSS_SELECTOR, ".StandardButton__StyledButton-jnuff8-0.loMqZ"
-                                                                    "X.btn.btn-default.Styles__StyledActionButton-m00sx"
-                                                                    "1-0.dXqePM")
+        no_instructor_avail = driver.find_elements(By.CSS_SELECTOR, ".sc-LzLrV.ialHNx.btn btn-default.sc-LzLrW.iauerG")
         if len(no_instructor_avail) >= 1:
             no_instructor_avail[1].click()
             self.status_bar.configure(text="83% Complete.")

@@ -76,11 +76,11 @@ class LessonWB:
 
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
-                                            ((By.CSS_SELECTOR, "div.StandardButton__Container-gpgy18-1.dQqJKa")))
+                                            ((By.CSS_SELECTOR, ".sc-fzXfLR.kVkSNn.btn.btn-default.mt-3")))
         except TimeoutException:
             # if the cookie is out of date, and FlightLogger logs itself out, the student cannot log back in themselves
             # so this element (the login box) will show up, and message box is issued.
-            login_element = driver.find_elements(By.CSS_SELECTOR, ".email.required.control-label")
+            login_element = driver.find_elements(By.CSS_SELECTOR, ".form-floating.mb-3.email.required.member_session_email")
             # will proceed if logged out.
             if len(login_element) >= 1:
                 CTkMessagebox(title="Error",
@@ -95,7 +95,7 @@ class LessonWB:
             return
 
         self.status_bar.configure(text="34% Complete.")
-        buttons = driver.find_element(By.CSS_SELECTOR, ".StandardButton__Container-gpgy18-1.dQqJKa")
+        buttons = driver.find_element(By.CSS_SELECTOR, ".sc-fzXfLR.kVkSNn.btn.btn-default.mt-3")
         driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
         time.sleep(0.5)
         for i in range(8):
@@ -105,14 +105,14 @@ class LessonWB:
 
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
-                                            ((By.XPATH, "/html/body/div[7]/div/div/form/div[2]/div[1]/input")))
+                                            ((By.XPATH, '//*[@id="documentName"]')))
         except TimeoutException:
             driver.quit()
             self.timeout_error()
             self.failed_reset_icons()
             return
         self.status_bar.configure(text="50% Complete.")
-        name_label = driver.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[2]/div[1]/input")
+        name_label = driver.find_element(By.XPATH, '//*[@id="documentName"]')
         name_label.send_keys(f"*{self.info['file_name']}")
         file_drag = driver.find_element(By.CSS_SELECTOR, "input[type='file']")
         file_drag.send_keys(f"{os.getcwd()}/WB/Photos/combined.jpeg")
@@ -126,7 +126,7 @@ class LessonWB:
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
                                             ((By.XPATH,
-                                              "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/div/div/div/div/div[2]/div[2]/div[1]/div[1]/a")))
+                                              "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/div/div/div/div/div[2]/div[2]/div/div[1]/a")))
         except TimeoutException:
             driver.quit()
             self.timeout_error()
