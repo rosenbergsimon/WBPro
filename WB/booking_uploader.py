@@ -29,7 +29,7 @@ class BookingWB:
         if sys.platform == "linux":
             self.profile_path = f"/home/{os.getlogin()}/.cache/mozilla/firefox/folder.selenium_profile"
         if sys.platform == "win32":
-            self.profile_path = f"user-data-dir:C:/Users/{os.getlogin()}/AppData/Local/Programs/Python/Python312/Lib/site-packages/selenium/profiles/wpp"
+            self.profile_path = f"user-data-dir=C:/Users/{os.getlogin()}/AppData/Local/Programs/Python/Python312/Lib/site-packages/selenium/profiles/wpp"
 
         self.school_code = os.environ.get("URL_SCHOOL")
         self.url = f"https://{self.school_code}.flightlogger.net/bookings/overview"
