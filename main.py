@@ -23,7 +23,9 @@ if sys.platform != "win32":
 else:
     set_scale()
 
-import pyautogui
+if sys.platform != "linux":
+    import pyautogui
+
 
 # bg = #353535, buttons = #3EA216, highlight buttons = #74BD57
 
@@ -86,7 +88,8 @@ class MainApp:
 
     # will shut down the python process
     def quit_application(self):
-        self.watcher_stop()
+        if sys.platform != "linux":
+            self.watcher_stop()
         self.current_window.quit()
         self.current_window.destroy()
         self.root.quit()
@@ -97,9 +100,15 @@ class MainApp:
 # nothing happens on it. The whole program is run from toplevel windows.
 if __name__ == "__main__":
     run = tk.CTk()
+    # run.tk.call("tk", "scaling", "2.5")
     run.withdraw()
 
     app = MainApp(run)
-    watcher = MouseInactivityWatcher(run, 240, app)
+
+    # tk.set_window_scaling(1.5)
+    # tk.set_widget_scaling(1.5)
+    
+    if sys.platform != "linux":
+        watcher = MouseInactivityWatcher(run, 240, app)
 
     run.mainloop()
