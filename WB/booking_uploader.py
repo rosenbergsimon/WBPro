@@ -116,7 +116,7 @@ class BookingWB:
 
         # makes sure the button has had time to actually disable, before running the next detector which checks if it
         # has become enabled
-        time.sleep(2)
+        time.sleep(3)
 
         button_wait = WebDriverWait(driver, 20)
 
@@ -132,17 +132,17 @@ class BookingWB:
         if len(no_instructor_avail) >= 1:
             no_instructor_avail[1].click()
             self.status_bar.configure(text="83% Complete.")
-            time.sleep(2)
+            time.sleep(5)
             driver.quit()
-            time.sleep(0.2)
+            time.sleep(1)
             # below is to make sure the specially named file gets deleted since it is not needed anymore
             self.root.update()
             self.finish_upload()
         else:
             self.status_bar.configure(text="83% Complete.")
-            time.sleep(2)
+            time.sleep(5)
             driver.quit()
-            time.sleep(0.2)
+            time.sleep(1)
             self.root.update()
             self.finish_upload()
 

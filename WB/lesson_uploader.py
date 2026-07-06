@@ -121,6 +121,7 @@ class LessonWB:
         add_button = button_wait.until(lambda d: d.find_element(By.XPATH, "/html/body/div[7]/div/div/form/div[3]/button[1]"))
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
         self.status_bar.configure(text="66% Complete.")
+        time.sleep(2.5)
         add_button.click()
 
         try:
@@ -134,11 +135,11 @@ class LessonWB:
             return
         self.status_bar.configure(text="83% Complete.")
         # needed to ensure the upload actually saved on flight logger servers, and closing of webdriver is ok
-        time.sleep(2)
+        time.sleep(5)
 
         driver.quit()
 
-        time.sleep(0.2)
+        time.sleep(1)
 
         self.root.update()
 
