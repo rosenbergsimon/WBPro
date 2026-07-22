@@ -4,6 +4,9 @@ from threading import Thread
 import time
 import ctypes
 import sys
+import typer
+
+app = typer.Typer()
 
 def set_scale():
     user32 = ctypes.windll.user32
@@ -98,17 +101,21 @@ class MainApp:
 
 # run is withdraw from the taskbar/user access, is only for mainloop. The run instance is actually the base root, but
 # nothing happens on it. The whole program is run from toplevel windows.
-if __name__ == "__main__":
+@app.command()
+def launch(tk_scaling: str = "1.0", window_scaling: float = 1.0):
     run = tk.CTk()
-    # run.tk.call("tk", "scaling", "2.5")
+    run.tk.call("tk", "scaling", tk_scaling)
     run.withdraw()
 
     app = MainApp(run)
 
-    # tk.set_window_scaling(1.5)
-    # tk.set_widget_scaling(1.5)
+    tk.set_window_scaling(window_scaling)
+    tk.set_widget_scaling(window_scaling)
     
     if sys.platform != "linux":
         watcher = MouseInactivityWatcher(run, 240, app)
 
     run.mainloop()
+
+if __name__ == "__main__":
+    app()

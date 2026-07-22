@@ -6,3 +6,4 @@ matplotlib
 CTkMessageBox
 requests
 psutil
+typer

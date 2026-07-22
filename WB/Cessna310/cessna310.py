@@ -2,7 +2,7 @@ import customtkinter as tk
 from WB.Cessna310.input import Input
 from WB.image import ImageWindow
 from WB.upload import Upload
-from WB.Cessna310.calculation_pim import CalculationPim
+from WB.Cessna310.calculation_fxa import CalculationFxa
 from customtkinter import CTkImage
 from PIL import Image
 
@@ -50,7 +50,7 @@ class C310(tk.CTkToplevel):
     # holds functions for updating the wb images
     def calculate(self, data):
         self.data = data
-        self.calculation = CalculationPim(self.data)
+        self.calculation = CalculationFxa(self.data)
         self.data = self.calculation.check_wb()
         self.new_right()
 

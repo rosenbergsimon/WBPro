@@ -20,7 +20,7 @@ class Input(tk.CTkFrame):
         self.one_photo = CTkImage(dark_image=Image.open("./WB/Photos/one.png"), size=(48, 48))
 
         # specific options to the 152's here
-        self.ac_options = ["C-GPIM (3 Seats)", "C-GPIM (4 Seats)", "C-GPIM (5 Seats)", "C-GPIM (6 Seats)"]
+        self.ac_options = ["C-GFXA (3 Seats)", "C-GFXA (4 Seats)", "C-GFXA (5 Seats)", "C-GFXA (6 Seats)"]
 
         # below are all the items on the screen.
         self.one_icon = tk.CTkButton(self, image=self.one_photo, height=48, width=48, state="disabled",
@@ -56,13 +56,13 @@ class Input(tk.CTkFrame):
         self.back_entry = tk.CTkEntry(self, width=100, font=self.label_font)
         self.back_entry.grid(column=1, row=5, padx=20, pady=12)
 
-        self.bag_nose_label = tk.CTkLabel(self, text="Nose Baggage (Max 347)",
+        self.bag_nose_label = tk.CTkLabel(self, text="Nose Baggage (Max 321)",
                                           width=354, font=self.label_font, anchor="w")
         self.bag_nose_label.grid(column=0, row=6, padx=20, pady=12)
         self.bag_nose_entry = tk.CTkEntry(self, width=100, font=self.label_font)
         self.bag_nose_entry.grid(column=1, row=6, padx=20, pady=12)
 
-        self.bag_wing_label = tk.CTkLabel(self, text="Wing Baggage (Max 240)",
+        self.bag_wing_label = tk.CTkLabel(self, text="Wing Baggage (Max 80)",
                                           width=354, font=self.label_font, anchor="w")
         self.bag_wing_label.grid(column=0, row=7, padx=20, pady=12)
         self.bag_wing_entry = tk.CTkEntry(self, width=100, font=self.label_font)
@@ -127,7 +127,7 @@ class Input(tk.CTkFrame):
         # if nothing entered, turns it into 0. Also turns everything into absolute value. Student may be tempted to
         # enter fuel burn in negative.
         self.data = {i: ((abs(float(j))) if j != '' else 0.0) for i, j in self.data.items()}
-        self.data["type"] = "Cessna 310"  # ignore these
+        self.data["type"] = "Cessna 310"
         self.data['ident'] = self.ac_box.get()
 
         self.data['fuel_load'] = (self.data['fuel_load_main'] + self.data['fuel_load_aux'])
@@ -143,13 +143,13 @@ class Input(tk.CTkFrame):
                           button_color="#3EA216")
 
             return
-        if self.data['bag1'] > 347:
+        if self.data['bag1'] > 321:
             CTkMessagebox(title="Error",
                           message="Baggage compartment is overweight.",
                           font=("ebrima", 14), fg_color="#353535",
                           button_color="#3EA216")
             return
-        if self.data['bag2'] > 240:
+        if self.data['bag2'] > 80:
             CTkMessagebox(title="Error",
                           message="Baggage compartment is overweight.",
                           font=("ebrima", 14), fg_color="#353535",

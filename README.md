@@ -4,7 +4,11 @@
 
 WBPro is an end-user-focused Python program I made for the fligth school I attend, designed to integrate the weight-and-balance control system with FlightLogger's web-based flight school scheduling and management service. It allows for electronic creation of completed weight-and-balance forms, and subsequent uploading to the FlightLogger website. The completed form is stored on a students' "lesson", or on a flight booking, in the case of a non-school flight. 
 
-Run from the python3 main.py file. The program incorporates a User Interface built with the CustomTkinter module, weight-and-balance form creation built with MatPlotLib, an API call using FlightLogger's GraphQL API to retrieve upcoming flight information, and an automated web browser component with Selenium to do the uploading to the FlightLogger website. An API function does not exist for uploading documents to lessons or bookings on FlightLogger. Error handling is only sufficient for the use cases at my school. 
+Run from the python3 main.py file. Two flags may be added in; one is --tk-scaling to change the overall tk scaling size. The other is --window-scaling, which is used to change the size of specific tk widgets. Regular monitors won't need these flags, but screens with zoom applied, eg. laptops, will need to be played around with to find the best setting. Example:
+
+    python3 main.py --tk-scaling 1.5 --window-scaling 2.25
+
+The program incorporates a User Interface built with the CustomTkinter module, weight-and-balance form creation built with MatPlotLib, an API call using FlightLogger's GraphQL API to retrieve upcoming flight information, and an automated web browser component with Selenium to do the uploading to the FlightLogger website. An API function does not exist for uploading documents to lessons or bookings on FlightLogger. Error handling is only sufficient for the use cases at my school. 
 
 # Information
 
