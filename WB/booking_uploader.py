@@ -130,7 +130,7 @@ class BookingWB:
 
         no_instructor_avail = driver.find_elements(By.XPATH, '/html/body/div[5]/div/div/div[4]/div/div/div/div/div[2]/button[2]')
         if len(no_instructor_avail) >= 1:
-            no_instructor_avail[1].click()
+            no_instructor_avail[0].click()
             self.status_bar.configure(text="83% Complete.")
             time.sleep(5)
             driver.quit()

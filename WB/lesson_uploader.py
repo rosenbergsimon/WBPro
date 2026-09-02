@@ -76,7 +76,7 @@ class LessonWB:
 
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
-                                            ((By.CSS_SELECTOR, ".sc-fzXfLR.kVkSNn.btn.btn-default.mt-3")))
+                                            ((By.CSS_SELECTOR, ".sc-dAlyuH.htiSTT.btn.btn-default.mt-3")))
         except TimeoutException:
             # if the cookie is out of date, and FlightLogger logs itself out, the student cannot log back in themselves
             # so this element (the login box) will show up, and message box is issued.
@@ -95,7 +95,7 @@ class LessonWB:
             return
 
         self.status_bar.configure(text="34% Complete.")
-        buttons = driver.find_element(By.CSS_SELECTOR, ".sc-fzXfLR.kVkSNn.btn.btn-default.mt-3")
+        buttons = driver.find_element(By.CSS_SELECTOR, ".sc-dAlyuH.htiSTT.btn.btn-default.mt-3")
         driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
         time.sleep(0.5)
         for i in range(8):
