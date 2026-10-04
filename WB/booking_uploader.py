@@ -120,7 +120,8 @@ class BookingWB:
 
         button_wait = WebDriverWait(driver, 20)
 
-        add_button = button_wait.until(lambda d: d.find_element(By.CSS_SELECTOR, ".sc-jdUcAg.kkyrUf.btn.btn-submit.sc-fyVfxW.jexSBm"))
+        add_button = button_wait.until(lambda d: d.find_element(By.XPATH, 
+        '/html/body/div[5]/div//div/div[3]/div/div/div[2]/div/form/ul/div[2]/div[1]/button[1]'))
         button_wait.until(lambda d: not add_button.get_attribute("disabled"))
 
         add_button.click()
