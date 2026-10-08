@@ -76,7 +76,7 @@ class LessonWB:
 
         try:
             WebDriverWait(driver, 15).until(ec.presence_of_element_located
-                                            (By.XPATH, "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/button"))
+                                            ((By.XPATH, "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/button")))
         except TimeoutException:
             # if the cookie is out of date, and FlightLogger logs itself out, the student cannot log back in themselves
             # so this element (the login box) will show up, and message box is issued.
