@@ -96,7 +96,7 @@ class LessonWB:
 
         self.status_bar.configure(text="34% Complete.")
         buttons = driver.find_element(By.XPATH, "/html/body/main/div[3]/div/div/div/div[2]/div[1]/div/div[1]/div/div[3]/button")
-       driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
+        driver.execute_script("arguments[0].scrollIntoView(true);", buttons)
         time.sleep(0.5)
         for i in range(8):
             driver.find_element("tag name", "body").send_keys(Keys.ARROW_UP)
